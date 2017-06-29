@@ -14,7 +14,7 @@ This application is configured to be run as a container, please check the DC/OS 
 * Running container on Kubernetes
 * Maybe I can run on Google/AmazonWS/Azure cloud?
 
-##Next research
+## Next research
 * Going back to Scala programming
     * Akka Streams
     * Akka FSM
