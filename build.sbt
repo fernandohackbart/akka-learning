@@ -1,4 +1,3 @@
-
 name := "akka-learning"
 version := "1.0"
 scalaVersion := "2.12.1"
@@ -21,7 +20,6 @@ enablePlugins(JavaAppPackaging)
 enablePlugins(UniversalPlugin)
 enablePlugins(DockerPlugin)
 
-
 packageName in Docker := "akka-learning"
 version in Docker := "0.0.1"
 maintainer in Docker := "Fernando Hackbart<fhackbart@gmail.com>"
@@ -33,5 +31,3 @@ dockerBaseImage := "biosphere/biosphere:base"
 daemonUser in Docker := "biosphere"
 dockerExposedPorts := Seq(9000)
 defaultLinuxInstallLocation in Docker := "/u01/akka-learning"
-
-
