@@ -17,6 +17,21 @@ libraryDependencies ++= {
   )
 }
 
+enablePlugins(JavaAppPackaging)
 enablePlugins(UniversalPlugin)
-//enablePlugins(JavaAppPackaging)
-//enablePlugins(DockerPlugin)
+enablePlugins(DockerPlugin)
+
+
+packageName in Docker := "akka-learning"
+version in Docker := "0.0.1"
+maintainer in Docker := "Fernando Hackbart<fhackbart@gmail.com>"
+packageSummary in Docker := "Akka learning application (Fernando Hackbart)"
+packageDescription := "Docker [micro|nano] Akka based Service"
+dockerRepository := Some("biosphere")
+dockerExecCommand := Seq("sudo","/usr/bin/docker")
+dockerBaseImage := "biosphere/biosphere:base"
+daemonUser in Docker := "biosphere"
+dockerExposedPorts := Seq(9000)
+defaultLinuxInstallLocation in Docker := "/u01/akka-learning"
+
+

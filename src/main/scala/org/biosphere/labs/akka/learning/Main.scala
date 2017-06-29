@@ -19,14 +19,9 @@ object Main extends App with Service {
   override val greetingFetcher = actorSystem.actorOf(Props[GreetingFetcher], "greetingFetcher")
   val bindingFuture = Http().bindAndHandle(routes, httpHost, httpPort)
 
-  //Check how this behaves with Docker
-  println(s"Waiting for requests at http://$httpHost:$httpPort/...\nHit RETURN to terminate")
-  StdIn.readLine()
-  bindingFuture.flatMap(_.unbind())
-  actorSystem.terminate()
-
-  //curl -XPOST -H "Content-Type:application/json" -d '{"brand":"IKEA","name":"Malmo"}' http://localhost:9000/product
-  //curl -XPOST -H "Content-Type:application/json" -d '{"messageBody":"Greetings!"}' http://localhost:9000/product
-  //curl -XGET  http://localhost:9000/product
-  //curl -XGET  http://localhost:9000/status
+  //Should be commented out to be run into Docker (otherwise shuts down the system :P)
+  //println(s"Waiting for requests at http://$httpHost:$httpPort/...\nHit RETURN to terminate")
+  //StdIn.readLine()
+  //bindingFuture.flatMap(_.unbind())
+  //actorSystem.terminate()
 }
