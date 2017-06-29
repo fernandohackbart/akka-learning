@@ -1,11 +1,11 @@
-package org.biosphere.labs.BuyAlong
+package org.biosphere.labs.akka.learning
 
 import akka.actor.{ActorSystem, Props}
 import akka.event.{Logging, LoggingAdapter}
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
-import org.biosphere.labs.BuyAlong.utils.Service
-import org.biosphere.labs.BuyAlong.actors.{GreetingFetcher, ProductPersister}
+import org.biosphere.labs.akka.learning.utils.Service
+import org.biosphere.labs.akka.learning.actors.{GreetingFetcher, ProductPersister}
 
 import scala.concurrent.ExecutionContext
 import scala.io.StdIn
@@ -18,6 +18,8 @@ object Main extends App with Service {
   override val productPersister = actorSystem.actorOf(Props[ProductPersister], "productpersister")
   override val greetingFetcher = actorSystem.actorOf(Props[GreetingFetcher], "greetingFetcher")
   val bindingFuture = Http().bindAndHandle(routes, httpHost, httpPort)
+
+  //Check how this behaves with Docker
   println(s"Waiting for requests at http://$httpHost:$httpPort/...\nHit RETURN to terminate")
   StdIn.readLine()
   bindingFuture.flatMap(_.unbind())

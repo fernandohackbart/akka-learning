@@ -1,4 +1,4 @@
-package org.biosphere.labs.BuyAlong.utils
+package org.biosphere.labs.akka.learning.utils
 
 
 class DisplayActorsCaller(x: AnyRef, methodName: String) {

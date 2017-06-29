@@ -1,4 +1,4 @@
-package org.biosphere.labs.BuyAlong.utils
+package org.biosphere.labs.akka.learning.utils
 
 import akka.actor.ActorRef
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport

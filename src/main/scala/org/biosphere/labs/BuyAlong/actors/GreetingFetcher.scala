@@ -1,4 +1,4 @@
-package org.biosphere.labs.BuyAlong.actors
+package org.biosphere.labs.akka.learning.actors
 
 import scala.concurrent.duration._
 import akka.actor.{Actor, ActorLogging}
@@ -7,9 +7,9 @@ import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
 import akka.http.scaladsl.model.{HttpRequest, HttpResponse, StatusCodes}
 import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.stream.ActorMaterializer
-import org.biosphere.labs.BuyAlong.actors.GreetingFetcherCommands.{FETCHGREETING, FETCHGREETINGPING}
-import org.biosphere.labs.BuyAlong.actors.ProductPersisterStatus.FAIL
-import org.biosphere.labs.BuyAlong.utils.{GreetingResponse, Protocols}
+import org.biosphere.labs.akka.learning.actors.GreetingFetcherCommands.{FETCHGREETING, FETCHGREETINGPING}
+import org.biosphere.labs.akka.learning.actors.ProductPersisterStatus.FAIL
+import org.biosphere.labs.akka.learning.utils.{GreetingResponse, Protocols}
 
 import scala.concurrent.Await
 
