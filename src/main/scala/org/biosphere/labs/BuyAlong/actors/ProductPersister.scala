@@ -9,6 +9,8 @@ import org.biosphere.labs.BuyAlong.actors.GreetingFetcherCommands.FETCHGREETING
 import org.biosphere.labs.BuyAlong.actors.ProductPersisterStatus.FAIL
 import org.biosphere.labs.BuyAlong.utils._
 
+import scala.concurrent.Await
+
 object ProductPersisterStatus {
   case object FAIL
 }
@@ -19,19 +21,22 @@ class ProductPersister extends Actor with ActorLogging {
 
   def receive = {
     case Product(brand,name) =>
-      log.info(s"ProductPersister ${brand}.${name}!")
+      log.info(s"ProductPersister $brand.$name!")
       sequence+=1
-      val respProduct = Product(brand,s"${name}-Persisted-${sequence}")
+      val respProduct = Product(brand,s"$name-Persisted-$sequence")
       sender() ! respProduct
     case ProductOperation(operation,Product(brand,name)) =>
-      log.info(s"ProductPersister ProductOperation ${operation} ${brand}.${name}!")
+      log.info(s"ProductPersister ProductOperation $operation $brand.$name!")
       sequence+=1
-      val respProduct = Product(brand,s"${name}-${operation}-${sequence}")
+      val respProduct = Product(brand,s"$name-$operation-$sequence")
       sender() ! respProduct
     case GreetingRequestActor(actorRef) =>
-      actorRef ? FETCHGREETING
-      //fake response
-      sender() ! GreetingResponse(1,"Fake")
+      val respFuture = actorRef ? FETCHGREETING
+      val response = Await.result(respFuture, 5.second).asInstanceOf[GreetingResponse]
+      if (response.isInstanceOf[GreetingResponse])
+        sender() ! response
+      else
+        sender() ! FAIL
     case _      =>
       log.warning("ProductPersister received unknown message")
       sender() ! FAIL
