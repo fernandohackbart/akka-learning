@@ -27,9 +27,9 @@ class GreetingFetcher extends Actor with ActorLogging with Protocols with SprayJ
   def receive = {
     case FETCHGREETING =>
       log.info("GreetingFetcher FETCHGREETING")
+      val s = sender
       val http = Http(context.system)
       val reqResp = http.singleRequest(HttpRequest(uri = "http://echo.jsontest.com/key/value/one/two"))
-      var response = GreetingResponse("DEFAULT","DEFAULT")
       val result = reqResp map {
         _ match {
           case HttpResponse(StatusCodes.OK, headers, entity, _) =>
@@ -39,25 +39,22 @@ class GreetingFetcher extends Actor with ActorLogging with Protocols with SprayJ
             val result = Await.result(resltFuture, 1.second)
             if (result.isInstanceOf[GreetingResponse]) {
               log.info(s"GreetingFetcher entity.isInstanceOf[GreetingResponse] Values: ${result.one}-${result.key} ")
-              response=result
-              //sender() ! response
+              s ! result
             }
             else {
               log.info("GreetingFetcher NOT entity.isInstanceOf[GreetingResponse]")
-              //sender() ! FAIL
+              s ! FAIL
             }
           case resp@HttpResponse(code, _, _, _) =>
             log.info("GreetingFetcher request failed, response code: " + code)
             //resp.discardEntityBytes()
-            //sender() ! FAIL
+            s ! FAIL
           case unknown =>
             log.info(s"GreetingFetcher unknown response: $unknown")
-            //sender() ! FAIL
+            s ! FAIL
         }
       }
-      sender() ! response
     case FETCHGREETINGPING =>
       sender() ! GreetingResponse("PONG","PONG")
-
   }
 }
