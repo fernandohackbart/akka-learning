@@ -99,7 +99,7 @@ cat > ${BIOSPHERE_DCOS}/akka-learning-0.0.1.json <<EOF
           "image": "biosphere/akka-learning:0.0.1",
           "network": "BRIDGE",
           "portMappings": [
-            { "hostPort": 9000, "containerPort": 9000, "protocol": "tcp"},
+            { "hostPort": 9000, "containerPort": 9000, "protocol": "tcp"}
           ]
         }
     },
@@ -124,8 +124,8 @@ dcos task
 
 ## Test the akka-learning application
 ```
+curl -XGET  http://192.168.65.60:9000/product
+curl -XGET  http://192.168.65.60:9000/status
 curl -XPOST -H "Content-Type:application/json" -d '{"brand":"ACME","name":"RoadRunner"}' http://92.168.65.60:9000/product
 curl -XPOST -H "Content-Type:application/json" -d '{"messageBody":"Greetings!"}' http://92.168.65.60:9000/product
-curl -XGET  http://92.168.65.60:9000/product
-curl -XGET  http://92.168.65.60:9000/status
 ```
