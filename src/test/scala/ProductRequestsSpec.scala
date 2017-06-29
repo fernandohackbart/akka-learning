@@ -9,8 +9,8 @@ import org.biosphere.labs.akka.learning.utils._
 
 class ProductRequestsSpec extends WordSpec with Matchers with ScalatestRouteTest with Service {
 
-  val productBilly = Product("IKEA", "Billy")
-  val productMalmo = Product("IKEA", "Malmo")
+  val productRoadRunner = Product("ACME", "RoadRunner")
+  val productChaparral = Product("ACME", "Chaparral")
 
   override implicit val actorSystem = ActorSystem()
   //override implicit def executor: ExecutionContext = actorSystem.dispatcher
@@ -22,7 +22,7 @@ class ProductRequestsSpec extends WordSpec with Matchers with ScalatestRouteTest
   "The service" should {
     "return a product for GET requests to the /product path" in {
       Get("/product") ~> routes ~> check {
-        responseAs[Product] shouldEqual productBilly
+        responseAs[Product] shouldEqual productRoadRunner
         contentType shouldBe ContentTypes.`application/json`
         status shouldBe StatusCodes.OK
       }
@@ -31,10 +31,10 @@ class ProductRequestsSpec extends WordSpec with Matchers with ScalatestRouteTest
 
   it should {
     "respond with a HTML text if the request if of the Product type" in {
-      Post(s"/product", Product(productMalmo.brand, productMalmo.name)) ~> routes ~> check {
+      Post(s"/product", Product(productChaparral.brand, productChaparral.name)) ~> routes ~> check {
         status shouldBe StatusCodes.OK
         contentType shouldBe ContentTypes.`application/json`
-        responseAs[Product] shouldBe Product("IKEA", "Malmo-Persisted-1")
+        responseAs[Product] shouldBe Product("ACME", "Chaparral-Persisted-1")
       }
     }
   }

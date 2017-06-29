@@ -22,7 +22,7 @@ trait Service extends Protocols with Config {
       path("product") {
         get {
           log.info("Service(/product) GET")
-          complete(StatusCodes.OK, Product("IKEA", "Billy"))
+          complete(StatusCodes.OK, Product("ACME", "Chaparral"))
         } ~
           post {
             log.info("Service(/product) POST")

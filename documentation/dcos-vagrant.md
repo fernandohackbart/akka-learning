@@ -124,7 +124,7 @@ dcos task
 
 ## Test the akka-learning application
 ```
-curl -XPOST -H "Content-Type:application/json" -d '{"brand":"IKEA","name":"Malmo"}' http://92.168.65.60:9000/product
+curl -XPOST -H "Content-Type:application/json" -d '{"brand":"ACME","name":"RoadRunner"}' http://92.168.65.60:9000/product
 curl -XPOST -H "Content-Type:application/json" -d '{"messageBody":"Greetings!"}' http://92.168.65.60:9000/product
 curl -XGET  http://92.168.65.60:9000/product
 curl -XGET  http://92.168.65.60:9000/status
