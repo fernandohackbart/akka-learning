@@ -1,10 +1,12 @@
-# Windows 10
+# Running the akka-learning application on DC/OS (Vagrant)
+
+## Windows 10
 Using Windows 10 with Cygwin (https://www.cygwin.com)
 
-# CentOS 7
+## CentOS 7
 Using CentOS 7 running on VirtualBox 
 
-# Vagrant
+## Vagrant
 * https://www.vagrantup.com/docs/virtualbox/boxes.html
 * https://blog.engineyard.com/2014/building-a-vagrant-box
 
@@ -27,12 +29,12 @@ cd /cygdrive/c/Biosphere/config/dcos-vagrant
 vagrant destroy -f a1 m1 p1 boot 
 ```
 
-# DC/OS Client OpenID token
+## DC/OS Client OpenID token
 
 Access the url and get the redirect to login (http://m1.dcos)
 
 
-# DC/OS Client Windows
+## DC/OS Client Windows
 * https://github.com/dcos/dcos-vagrant/blob/master/README.md
 	
 Fix the /etc/hosts
@@ -56,7 +58,7 @@ dcos auth login
 dcos
 ```
 
-# DC/OS Client Centos 7 
+## DC/OS Client Centos 7 
 
 Fix the /etc/hosts
  ```
@@ -77,7 +79,7 @@ dcos auth login
 dcos	
 ```
 
-# Docker app to the DC/OS instance
+## Docker app to the DC/OS instance
 * https://dcos.io/docs/1.7/usage/tutorials/docker-app/
 
 ```
@@ -88,24 +90,23 @@ mkdir -p ${BIOSPHERE_DCOS}
 ```
 
 ```
-cat > ${BIOSPHERE_DCOS}/biosphere-1.0.0.json <<EOF
+cat > ${BIOSPHERE_DCOS}/akka-learning-0.0.1.json <<EOF
 {
-    "id": "biosphere-1.0.0",
+    "id": "akka-learning-0.0.1",
     "container": {
     "type": "DOCKER",
     "docker": {
-          "image": "biosphere/biosphere:1.0.0",
+          "image": "biosphere/akka-learning:0.0.1",
           "network": "BRIDGE",
           "portMappings": [
-            { "hostPort": 1040, "containerPort": 1040, "protocol": "tcp"},
-            { "hostPort": 1060, "containerPort": 1060, "protocol": "tcp"}
+            { "hostPort": 9000, "containerPort": 9000, "protocol": "tcp"},
           ]
         }
     },
     "acceptedResourceRoles": ["slave_public"],
     "instances": 1,
     "cpus": 0.1,
-    "mem": 90
+    "mem": 60
 }
 EOF
 ```
@@ -113,15 +114,15 @@ EOF
 ```
 cd /cygdrive/c/Biosphere/config/dcos-service
 
-cat ${BIOSPHERE_DCOS}/biosphere-1.0.0.json
-dcos marathon app add biosphere-1.0.0.json
+cat ${BIOSPHERE_DCOS}/akka-learning-0.0.1.json
+dcos marathon app add akka-learning-0.0.1.json
 dcos marathon app list
-dcos marathon app stop /biosphere-1.0.0
-dcos marathon app remove /biosphere-1.0.0
+dcos marathon app stop /akka-learning-0.0.1
+dcos marathon app remove /akka-learning-0.0.1
 dcos task
 ```
 
-# Test the akka-learning application
+## Test the akka-learning application
 ```
 curl -XPOST -H "Content-Type:application/json" -d '{"brand":"IKEA","name":"Malmo"}' http://92.168.65.60:9000/product
 curl -XPOST -H "Content-Type:application/json" -d '{"messageBody":"Greetings!"}' http://92.168.65.60:9000/product
