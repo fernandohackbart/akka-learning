@@ -10,7 +10,7 @@ import org.biosphere.labs.BuyAlong.actors.{GreetingFetcher, ProductPersister}
 import scala.concurrent.ExecutionContext
 import scala.io.StdIn
 
-object BuyAlong extends App with Service {
+object Main extends App with Service {
   override implicit val actorSystem = ActorSystem()
   implicit val executor: ExecutionContext = actorSystem.dispatcher
   override implicit val log: LoggingAdapter = Logging(actorSystem, getClass)
