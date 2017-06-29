@@ -17,3 +17,5 @@ libraryDependencies ++= {
   )
 }
 
+enablePlugins(JavaAppPackaging)
+enablePlugins(DockerPlugin)
