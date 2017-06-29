@@ -1,6 +1,5 @@
 package org.biosphere.labs.akka.learning.actors
 
-import scala.concurrent.duration._
 import akka.actor.{Actor, ActorLogging}
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
@@ -12,6 +11,7 @@ import org.biosphere.labs.akka.learning.actors.ProductPersisterStatus.FAIL
 import org.biosphere.labs.akka.learning.utils.{GreetingResponse, Protocols}
 
 import scala.concurrent.Await
+import scala.concurrent.duration._
 
 object GreetingFetcherCommands {
   case object FETCHGREETING

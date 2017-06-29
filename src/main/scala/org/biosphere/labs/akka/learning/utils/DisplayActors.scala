@@ -1,6 +1,5 @@
 package org.biosphere.labs.akka.learning.utils
 
-
 class DisplayActorsCaller(x: AnyRef, methodName: String) {
   def apply(_args: Any*): Any = {
     val args = _args.map(_.asInstanceOf[AnyRef])

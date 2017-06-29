@@ -4,8 +4,8 @@ import akka.actor.{ActorSystem, Props}
 import akka.event.{Logging, LoggingAdapter}
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
-import org.biosphere.labs.akka.learning.utils.Service
 import org.biosphere.labs.akka.learning.actors.{GreetingFetcher, ProductPersister}
+import org.biosphere.labs.akka.learning.utils.Service
 
 import scala.concurrent.ExecutionContext
 import scala.io.StdIn

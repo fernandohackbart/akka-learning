@@ -3,13 +3,12 @@ package org.biosphere.labs.akka.learning.actors
 import akka.actor.{Actor, ActorLogging}
 import akka.pattern.ask
 import akka.util.Timeout
-
-import scala.concurrent.duration._
 import org.biosphere.labs.akka.learning.actors.GreetingFetcherCommands.FETCHGREETING
 import org.biosphere.labs.akka.learning.actors.ProductPersisterStatus.FAIL
 import org.biosphere.labs.akka.learning.utils._
 
 import scala.concurrent.Await
+import scala.concurrent.duration._
 
 object ProductPersisterStatus {
   case object FAIL
