@@ -2,22 +2,39 @@
 Some (very) basic application to learn Akka Core concepts and deployment, everything is minimal learn the basic concepts and make it work...
 
 ## Research done
-* Akka HTTP routes
-* Actor message with ActorRef 
-* Marshal and unmarshal of JSON 
+* Akka core components
+    * Actor message with ActorRef 
+    * Marshal and unmarshal of JSON
+    * Get Actor system status
+* Akka HTTP
+    * http://doc.akka.io/docs/akka-http/current/scala/http/introduction.html
+    * routes
+    * tests for Akka HTTP
+    
 * Checking the packaging for Docker (sbt-native-packager) documentation/[sbt-package-docker.md](documentation/sbt-package-docker.md)
+
 * Running `biosphere/akka-learning:0.0.1` container on DC/OS 
     * This application was configured to be run as a container
     * DC/OS (Vagrant) documentation/[dcos-vagrant.md](documentation/dcos-vagrant.md)
 
 ## Current research
+* Akka core components
+    * ActorSystem.actorSelection: discovering actors and sending messages
+    * Actor.become(): changing the actor behavior based on received messages
 
 ## Next research
-* Akka Persistence and recover
-    * 
+* Akka core components
+    * Akka FSM
+        * http://doc.akka.io/docs/akka/current/scala/fsm.html
+        * Receiving HTTP requests and pushing through a stream for Actors to consume  
+    * Akka Persistence
+        * http://doc.akka.io/docs/akka/current/scala/persistence.html
+
 * Akka Streams
-* Akka FSM
+    * http://doc.akka.io/docs/akka/current/scala/stream/index.html
+
 * Akka clusters
+    * http://doc.akka.io/docs/akka/current/scala/common/cluster.html
 
 * Describe a basic application
     * Create a simple application that uses the learned technologies and makes some sense
@@ -31,5 +48,3 @@ Some (very) basic application to learn Akka Core concepts and deployment, everyt
     * https://cloud.google.com/container-engine/
     * https://azure.microsoft.com/en-us/offers/ms-azr-0044p/
     * http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-free-tier.html
-
-
