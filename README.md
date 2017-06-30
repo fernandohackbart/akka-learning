@@ -1,7 +1,7 @@
 # akka-learning
 Some (very) basic application to learn Akka Core concepts and deployment, everything is minimal learn the basic concepts and make it work...
 
-## Done research
+## Research done
 * Akka HTTP routes
 * Actor message with ActorRef 
 * Marshal and unmarshal of JSON 
@@ -11,13 +11,25 @@ Some (very) basic application to learn Akka Core concepts and deployment, everyt
     * DC/OS (Vagrant) documentation/[dcos-vagrant.md](documentation/dcos-vagrant.md)
 
 ## Current research
-* Running `biosphere/akka-learning:0.0.1` container on Kubernetes
-* Maybe I can run on Google/AmazonWS/Azure cloud?
 
 ## Next research
-* Going back to Scala programming
-    * Akka Streams
-    * Akka FSM
-    * Akka clusters
+* Akka Persistence and recover
+    * 
+* Akka Streams
+* Akka FSM
+* Akka clusters
+
+* Describe a basic application
+    * Create a simple application that uses the learned technologies and makes some sense
+
+* Running `biosphere/akka-learning:0.0.1` container on Kubernetes
+    * Will hold a bit in the deployment and wati to have a more complex application that can be described as a POD
+    * DC/OS x Kubernetes
+	* https://kubernetes.io/docs/getting-started-guides/dcos/
+
+* Maybe I can run on Google/AmazonWS/Azure cloud?
+    * https://cloud.google.com/container-engine/
+    * https://azure.microsoft.com/en-us/offers/ms-azr-0044p/
+    * http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-free-tier.html
 
 

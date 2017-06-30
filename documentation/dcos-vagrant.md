@@ -18,20 +18,29 @@ git clone https://github.com/dcos/dcos-vagrant
 cd dcos-vagrant
 cp VagrantConfig-1m-1a-1p.yaml VagrantConfig.yaml
 vagrant up
+```
 
+To maintain the vagrant environment (shutting down the Desktop to go home for example)
+```
 cd /cygdrive/c/Biosphere/config/dcos-vagrant
 vagrant suspend
 
 cd /cygdrive/c/Biosphere/config/dcos-vagrant
 vagrant resume
+```
 
+If the server gets too messy
+```
 cd /cygdrive/c/Biosphere/config/dcos-vagrant
 vagrant destroy -f a1 m1 p1 boot 
 ```
 
 ## DC/OS Client OpenID token
 
-Access the url and get the redirect to login (http://m1.dcos)
+Consoles URLS:
+* http://m1.dcos
+* http://m1.dcos/marathon
+* http://m1.dcos/mesos
 
 
 ## DC/OS Client Windows
