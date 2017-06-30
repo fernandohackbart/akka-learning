@@ -44,3 +44,16 @@ Publish the container
 ```
 docker:publish
 ```
+
+To run the container
+```
+docker run -p 9000 biosphere/akka-learning:0.0.1
+```
+Consume some services
+```
+curl -XGET  http://172.17.0.1:9000/product
+curl -XGET  http://172.17.0.1:9000/status
+curl -XPOST -H "Content-Type:application/json" -d '{"brand":"ACME","name":"RoadRunner"}' http://172.17.0.1:9000/product
+curl -XPOST -H "Content-Type:application/json" -d '{"messageBody":"Greetings!"}' http://172.17.0.1:9000/product
+```
+
