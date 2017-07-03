@@ -7,8 +7,8 @@ import akka.http.scaladsl.model.{HttpRequest, HttpResponse, StatusCodes}
 import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.stream.ActorMaterializer
 import org.biosphere.labs.akka.learning.actors.GreetingFetcherCommands.{FETCHGREETING, FETCHGREETINGPING}
-import org.biosphere.labs.akka.learning.actors.ProductPersisterStatus.FAIL
-import org.biosphere.labs.akka.learning.utils.{GreetingResponse, Protocols}
+import org.biosphere.labs.akka.learning.domain.OperationOutcome.FAIL
+import org.biosphere.labs.akka.learning.domain.{GreetingResponse, Protocols}
 
 import scala.concurrent.Await
 import scala.concurrent.duration._

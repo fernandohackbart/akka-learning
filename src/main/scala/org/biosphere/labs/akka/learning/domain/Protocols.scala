@@ -1,4 +1,4 @@
-package org.biosphere.labs.akka.learning.utils
+package org.biosphere.labs.akka.learning.domain
 
 import akka.actor.ActorRef
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
@@ -17,4 +17,9 @@ trait Protocols extends SprayJsonSupport with DefaultJsonProtocol {
   implicit val productOperationResponseFormat = jsonFormat1(ProductOperationResponse)
   implicit val greetingRequestFormat = jsonFormat1(GreetingRequest)
   implicit val greetingResponseFormat = jsonFormat2(GreetingResponse)
+}
+
+object OperationOutcome {
+  case object FAIL
+  case object OK
 }

@@ -5,6 +5,7 @@ import akka.actor.{ActorSystem, Props}
 import akka.event.{Logging, LoggingAdapter}
 import akka.stream.ActorMaterializer
 import org.biosphere.labs.akka.learning.actors.{GreetingFetcher, ProductCacher}
+import org.biosphere.labs.akka.learning.domain.Product
 import org.biosphere.labs.akka.learning.utils._
 
 class ProductRequestsSpec extends WordSpec with Matchers with ScalatestRouteTest with Service {
@@ -16,7 +17,8 @@ class ProductRequestsSpec extends WordSpec with Matchers with ScalatestRouteTest
   //override implicit def executor: ExecutionContext = actorSystem.dispatcher
   override implicit val log: LoggingAdapter = Logging(actorSystem, getClass)
   override implicit val materializer: ActorMaterializer = ActorMaterializer()
-  override val productPersister = actorSystem.actorOf(Props[ProductCacher], "productpersister")
+  override val productCacher = actorSystem.actorOf(Props[ProductCacher], "product-cacher")
+  override val productWriter = actorSystem.actorOf(Props[ProductCacher], "product-writer")
   override val greetingFetcher = actorSystem.actorOf(Props[GreetingFetcher], "greetingFetcher")
 
   "The service" should {
@@ -40,7 +42,7 @@ class ProductRequestsSpec extends WordSpec with Matchers with ScalatestRouteTest
   }
 /*
   it should {
-    "repond with a GreetingResponse got from internet " in {
+    "respond with a GreetingResponse got from internet " in {
       Post(s"/product", GreetingRequest("Greeting!")) ~> routes ~> check {
         status shouldBe StatusCodes.OK
         contentType shouldBe ContentTypes.`application/json`

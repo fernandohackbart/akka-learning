@@ -4,16 +4,13 @@ import akka.actor.{Actor, ActorLogging}
 import akka.pattern.ask
 import akka.util.Timeout
 import org.biosphere.labs.akka.learning.actors.GreetingFetcherCommands.FETCHGREETING
-import org.biosphere.labs.akka.learning.actors.ProductPersisterStatus.FAIL
-import org.biosphere.labs.akka.learning.utils._
+import org.biosphere.labs.akka.learning.domain.OperationOutcome.FAIL
+import org.biosphere.labs.akka.learning.domain.{GreetingResponse, Product}
+import org.biosphere.labs.akka.learning.domain._
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
 
-object ProductPersisterStatus {
-  case object FAIL
-  case object OK
-}
 
 class ProductCacher extends Actor with ActorLogging {
   var sequence = 0
