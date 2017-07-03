@@ -12,20 +12,21 @@ import scala.concurrent.duration._
 
 object ProductPersisterStatus {
   case object FAIL
+  case object OK
 }
 
-class ProductPersister extends Actor with ActorLogging {
+class ProductCacher extends Actor with ActorLogging {
   var sequence = 0
   implicit val timeout = Timeout(10.seconds)
 
   def receive = {
     case Product(brand,name) =>
-      log.info(s"ProductPersister $brand.$name!")
+      log.info(s"ProductCache $brand.$name!")
       sequence+=1
       val respProduct = Product(brand,s"$name-Persisted-$sequence")
       sender() ! respProduct
-    case ProductOperation(operation,Product(brand,name)) =>
-      log.info(s"ProductPersister ProductOperation $operation $brand.$name!")
+    case ProductOperationRequest(operation,Product(brand,name)) =>
+      log.info(s"ProductCache ProductOperation $operation $brand.$name!")
       sequence+=1
       val respProduct = Product(brand,s"$name-$operation-$sequence")
       sender() ! respProduct
@@ -37,7 +38,7 @@ class ProductPersister extends Actor with ActorLogging {
       else
         sender() ! FAIL
     case _      =>
-      log.warning("ProductPersister received unknown message")
+      log.warning("ProductCache received unknown message")
       sender() ! FAIL
   }
 }

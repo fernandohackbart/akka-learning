@@ -1,13 +1,17 @@
 package org.biosphere.labs.akka.learning.utils
 
+import akka.NotUsed
 import akka.actor.{ActorRef, ActorSystem}
 import akka.event.LoggingAdapter
 import akka.http.scaladsl.model.{ContentTypes, HttpEntity, StatusCodes}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import akka.pattern.ask
+import akka.stream.ActorMaterializer
+import akka.stream.scaladsl.{Flow, Keep, RunnableGraph, Sink, Source}
 import akka.util.Timeout
 
+import scala.concurrent.Future
 import scala.concurrent.duration._
 
 trait Service extends Protocols with Config {
@@ -15,6 +19,7 @@ trait Service extends Protocols with Config {
   implicit val log: LoggingAdapter
   val productPersister: ActorRef
   val greetingFetcher: ActorRef
+  implicit val materializer: ActorMaterializer
   implicit val timeout = Timeout(10.seconds)
 
   implicit val routes: Route = {
@@ -65,6 +70,19 @@ trait Service extends Protocols with Config {
               }
           }
       } ~
+        path("persist") {
+          post {
+            entity(as[ProductOperationRequest]) { productOp =>
+              //curl -XPOST -H "Content-Type:application/json" -d '{"operation":"operation","product":{"brand":"ACME","name":"Train"}}' http://localhost:9000/persist
+
+              log.info(s"Service(/persist) performing (${productOp.operation}) on ${productOp.product.brand}.${productOp.product.name}")
+              //Source(List(1, 2, 3)).map(_ + 1).async.map(_ * 2).to(Sink.foreach(println(_)))
+
+              // until we have a proper response
+              complete(StatusCodes.OK, ProductOperationResponse("OK"))
+            }
+          }
+        } ~
         path("status") {
           val res = new DisplayActorsExposer(actorSystem)('printTree)()
           complete(HttpEntity(ContentTypes.`text/plain(UTF-8)`, res.toString))

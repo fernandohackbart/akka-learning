@@ -1,10 +1,10 @@
 name := "akka-learning"
 version := "1.0"
-scalaVersion := "2.12.1"
+scalaVersion := "2.12.2"
 organization := "org.biosphere"
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
 libraryDependencies ++= {
-  //val akkaV      = "2.5.3"
+  val akkaV      = "2.5.3"
   val akkaHttpV  = "10.0.9"
   val scalaTestV = "3.2.0-SNAP5"
   Seq(
@@ -12,6 +12,9 @@ libraryDependencies ++= {
     "com.typesafe.akka" %% "akka-http" % akkaHttpV,
     "com.typesafe.akka" %% "akka-http-spray-json" % akkaHttpV,
     "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpV % "test",
+    //"com.typesafe.akka" %% "akka-persistence" % akkaV,
+    //"org.iq80.leveldb"  % "leveldb" % "0.9",
+    //"org.fusesource.leveldbjni" % "leveldbjni-all" % "1.8",
     "org.scalatest"     %% "scalatest" % scalaTestV % "test"
   )
 }
