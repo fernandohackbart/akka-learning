@@ -27,7 +27,7 @@ Some (very) basic application to learn Akka Core concepts and deployment, everyt
     * http://doc.akka.io/docs/akka/current/scala/stream/index.html
 
 * Actor interacting with Kafka
-    * Use the `spotify/kafka` container
+    * Using the [`spotify/kafka`](https://hub.docker.com/r/spotify/kafka) container
         * Easy to deploy and run (all in one)
     * Publishing events in one actor
         * Maybe the HTTP request publishes one event?
