@@ -18,6 +18,10 @@ Some (very) basic application to learn Akka Core concepts and deployment, everyt
 * Running `biosphere/akka-learning:0.0.1` container on DC/OS 
     * This application was configured to be run as a container
     * DC/OS (Vagrant) documentation/[dcos-vagrant.md](documentation/dcos-vagrant.md)
+ 
+* One actor interacting with Cassandra
+    * Received a JSON request via Akka HTTP and the actor insert in the Cassandra database
+    * 
 
 ## Current research
 * Akka core components
@@ -50,3 +54,5 @@ Some (very) basic application to learn Akka Core concepts and deployment, everyt
     * https://cloud.google.com/container-engine/
     * https://azure.microsoft.com/en-us/offers/ms-azr-0044p/
     * http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-free-tier.html
+
+* Check org.flywaydb looks like a very nice serialization / schema evolution tool 
