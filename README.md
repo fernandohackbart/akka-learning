@@ -24,11 +24,17 @@ Some (very) basic application to learn Akka Core concepts and deployment, everyt
     * 
 
 ## Current research
+* Actor interacting with Kafka
+    * Publishing events in one actor
+        * Maybe the HTTP request publishes one event?
+    * Consuming events in another actor
+        * Maybe the ProductWriter consumes one event?
+
+## Next research
 * Akka core components
     * ActorSystem.actorSelection: discovering actors and sending messages
     * Actor.become(): changing the actor behavior based on received messages
 
-## Next research
 * Akka core components
     * Akka FSM
         * http://doc.akka.io/docs/akka/current/scala/fsm.html
