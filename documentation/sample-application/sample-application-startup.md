@@ -2,7 +2,7 @@
  
 ## Cassandra
 
-###Server
+### Server
 ```
 docker run --name cassandra-server  -d -e CASSANDRA_BROADCAST_ADDRESS=172.17.0.2 -p 7000:7000 cassandra
 ```
@@ -18,7 +18,7 @@ docker stop cassandra-server
 docker rm cassandra-server
 ```
 
-###Client 
+### Client 
 ```
 docker run --name cassandra-client -it --link cassandra-server:cassandra --rm cassandra sh -c 'exec cqlsh "$CASSANDRA_PORT_9042_TCP_ADDR"'
 ```
@@ -32,6 +32,8 @@ Some useful commands
 DESCRIBE keyspaces;
 use <keyspace_name>;
 DESCRIBE tables;
+SELECT * FROM product;
+
 ```
 
 ## Kafka
@@ -56,5 +58,5 @@ docker rm akka-learning
 ```
 
 ```
-curl -XPOST -H "Content-Type:application/json" -d '{"operation":"operation","product":{"brand":"ACME","name":"Train"}}' http://localhost:9000/persist
- ```
+curl -XPOST -H "Content-Type:application/json" -d '{"operation":"operation","product":{"brand":"ACME","name":"Train"}}' http://172.17.0.3:9000/persist
+```

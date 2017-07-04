@@ -1,6 +1,8 @@
 # akka-learning
 Some (very) basic application to learn Akka Core concepts and deployment, everything is minimal learn the basic concepts and make it work...
 
+*Please do not take this as something done by someone that knows what is doing...*
+
 ## Research done
 * Akka core components
     * Actor message with ActorRef 
