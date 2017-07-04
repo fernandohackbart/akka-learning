@@ -21,12 +21,18 @@ Some (very) basic application to learn Akka Core concepts and deployment, everyt
  
 * One actor interacting with Cassandra
     * Received a JSON request via Akka HTTP and the actor insert in the Cassandra database
-    * 
 
 ## Current research
+* Akka Streams
+    * http://doc.akka.io/docs/akka/current/scala/stream/index.html
+
 * Actor interacting with Kafka
+    * Use the `spotify/kafka` container
+        * Easy to deploy and run (all in one)
     * Publishing events in one actor
         * Maybe the HTTP request publishes one event?
+        * https://github.com/akka/reactive-kafka/blob/master/docs/src/main/paradox/producer.md
+        * https://github.com/akka/reactive-kafka/blob/master/docs/src/test/scala/sample/scaladsl/ProducerExample.scala
     * Consuming events in another actor
         * Maybe the ProductWriter consumes one event?
 
@@ -41,9 +47,6 @@ Some (very) basic application to learn Akka Core concepts and deployment, everyt
         * Receiving HTTP requests and pushing through a stream for Actors to consume  
     * Akka Persistence
         * http://doc.akka.io/docs/akka/current/scala/persistence.html
-
-* Akka Streams
-    * http://doc.akka.io/docs/akka/current/scala/stream/index.html
 
 * Akka clusters
     * http://doc.akka.io/docs/akka/current/scala/common/cluster.html
