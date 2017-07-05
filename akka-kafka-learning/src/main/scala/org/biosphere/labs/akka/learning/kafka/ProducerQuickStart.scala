@@ -1,4 +1,6 @@
-package com.lightbend.akka.sample
+package org.biosphere.labs.akka.learning.kafka
+
+// https://github.com/akka/reactive-kafka/blob/master/docs/src/test/scala/sample/scaladsl/ProducerExample.scala
 
 import akka.actor.ActorSystem
 import akka.kafka.scaladsl.Producer.Message
@@ -16,7 +18,7 @@ import akka.{Done, NotUsed}
 
 import scala.util.{Failure, Success}
 
-trait ProducerExample {
+trait ProducerQuickStart {
   val system = ActorSystem("example")
 
   val producerSettings = ProducerSettings(system, new ByteArraySerializer, new StringSerializer).withBootstrapServers("172.17.0.2:9092")
@@ -27,7 +29,7 @@ trait ProducerExample {
 
   def terminateWhenDone(result: Future[Done]): Unit = {
     result.onComplete {
-      case Failure(e) =>
+      case Failure(e) =>l
         println("######################################### Failure #########################################")
         system.log.error(e, e.getMessage)
         system.terminate()
@@ -38,7 +40,7 @@ trait ProducerExample {
   }
 }
 
-object PlainSinkExample extends ProducerExample {
+object PlainSinkExample extends ProducerQuickStart {
   def main(args: Array[String]): Unit = {
     val done: NotUsed = Source(1 to 100)
       .map(_.toString)
@@ -52,7 +54,7 @@ object PlainSinkExample extends ProducerExample {
 }
 
 /*
-object PlainSinkWithProducerExample extends ProducerExample {
+object PlainSinkWithProducerExample extends ProducerQuickStart {
   def main(args: Array[String]): Unit = {
     val done = Source(1 to 100)
       .map(_.toString)
@@ -65,7 +67,7 @@ object PlainSinkWithProducerExample extends ProducerExample {
 }
 */
 
-object ProducerFlowExample extends ProducerExample {
+object ProducerFlowExample extends ProducerQuickStart {
   def main(args: Array[String]): Unit = {
     val done = Source(1 to 100)
       .map { n =>

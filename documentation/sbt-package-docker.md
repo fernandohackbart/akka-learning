@@ -57,3 +57,17 @@ curl -XPOST -H "Content-Type:application/json" -d '{"brand":"ACME","name":"RoadR
 curl -XPOST -H "Content-Type:application/json" -d '{"messageBody":"Greetings!"}' http://172.17.0.1:9000/product
 ```
 
+Fix root only access to docker command 
+```
+cat > /etc/sudoers.d/docker <<EOF
+fernando ALL=(ALL) NOPASSWD:/usr/bin/docker
+EOF
+```
+```
+
+Create alias file
+```
+cat > .alias <<EOF
+alias docker='sudo /usr/bin/docker'
+EOF
+```
