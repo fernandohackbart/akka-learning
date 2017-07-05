@@ -63,7 +63,6 @@ cat > /etc/sudoers.d/docker <<EOF
 fernando ALL=(ALL) NOPASSWD:/usr/bin/docker
 EOF
 ```
-```
 
 Create alias file
 ```
