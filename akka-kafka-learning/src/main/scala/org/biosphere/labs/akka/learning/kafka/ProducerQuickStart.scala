@@ -3,7 +3,7 @@ package org.biosphere.labs.akka.learning.kafka
 // https://github.com/akka/reactive-kafka/blob/master/docs/src/test/scala/sample/scaladsl/ProducerExample.scala
 
 import akka.actor.ActorSystem
-import akka.kafka.scaladsl.Producer.Message
+import akka.kafka.ProducerMessage
 import akka.kafka.ProducerSettings
 import akka.kafka.scaladsl.Producer
 import akka.stream.scaladsl.Source
@@ -12,14 +12,12 @@ import org.apache.kafka.common.serialization.ByteArraySerializer
 import org.apache.kafka.common.serialization.StringSerializer
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.Sink
-
 import scala.concurrent.Future
-import akka.{Done, NotUsed}
-
+import akka.Done
 import scala.util.{Failure, Success}
 
 trait ProducerQuickStart {
-  val system = ActorSystem("example")
+  val system = ActorSystem("ProducerQuickStart")
 
   val producerSettings = ProducerSettings(system, new ByteArraySerializer, new StringSerializer).withBootstrapServers("172.17.0.2:9092")
   val kafkaProducer = producerSettings.createKafkaProducer()
@@ -29,7 +27,7 @@ trait ProducerQuickStart {
 
   def terminateWhenDone(result: Future[Done]): Unit = {
     result.onComplete {
-      case Failure(e) =>l
+      case Failure(e) =>
         println("######################################### Failure #########################################")
         system.log.error(e, e.getMessage)
         system.terminate()
@@ -42,18 +40,17 @@ trait ProducerQuickStart {
 
 object PlainSinkExample extends ProducerQuickStart {
   def main(args: Array[String]): Unit = {
-    val done: NotUsed = Source(1 to 100)
+    val done = Source(1 to 100)
       .map(_.toString)
       .map { elem =>
         new ProducerRecord[Array[Byte], String]("topic1", elem)
       }
       .runWith(Producer.plainSink(producerSettings))
     println("######################################### PlainSinkExample #########################################")
-    //terminateWhenDone(done)
+    terminateWhenDone(done)
   }
 }
 
-/*
 object PlainSinkWithProducerExample extends ProducerQuickStart {
   def main(args: Array[String]): Unit = {
     val done = Source(1 to 100)
@@ -65,14 +62,13 @@ object PlainSinkWithProducerExample extends ProducerQuickStart {
     terminateWhenDone(done)
   }
 }
-*/
 
 object ProducerFlowExample extends ProducerQuickStart {
   def main(args: Array[String]): Unit = {
     val done = Source(1 to 100)
       .map { n =>
         val partition = 0
-        Message(new ProducerRecord[Array[Byte], String]("topic1", partition, null, n.toString), n)
+        ProducerMessage.Message(new ProducerRecord[Array[Byte], String]("topic1", partition, null, n.toString), n)
       }
       .via(Producer.flow(producerSettings))
       .map { result =>
