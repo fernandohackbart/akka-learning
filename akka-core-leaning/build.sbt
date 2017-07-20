@@ -1,4 +1,4 @@
-name := "akka-learning"
+name := "akka-core-learning"
 version := "1.0"
 scalaVersion := "2.12.2"
 organization := "org.biosphere"
@@ -28,14 +28,14 @@ enablePlugins(JavaAppPackaging)
 enablePlugins(UniversalPlugin)
 enablePlugins(DockerPlugin)
 
-packageName in Docker := "akka-learning"
+packageName in Docker := "akka-core-learning"
 version in Docker := "0.0.1"
 maintainer in Docker := "Fernando Hackbart<fhackbart@gmail.com>"
 packageSummary in Docker := "Akka learning application (Fernando Hackbart)"
-packageDescription := "Docker [micro|nano] Akka based Service"
+packageDescription := "Docker Akka based Service"
 dockerRepository := Some("biosphere")
 dockerExecCommand := Seq("sudo","/usr/bin/docker")
 dockerBaseImage := "biosphere/biosphere:base"
 daemonUser in Docker := "biosphere"
 dockerExposedPorts := Seq(9000)
-defaultLinuxInstallLocation in Docker := "/u01/akka-learning"
+defaultLinuxInstallLocation in Docker := "/u01/akka-core-learning"

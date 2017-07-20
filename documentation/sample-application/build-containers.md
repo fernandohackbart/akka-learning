@@ -17,6 +17,20 @@ Stop Docker service
 systemctl stop docker
 ```
 
+Fix root only access to docker command 
+```
+cat > /etc/sudoers.d/docker <<EOF
+fernando ALL=(ALL) NOPASSWD:/usr/bin/docker
+EOF
+```
+
+Create alias file
+```
+cat > ~/.alias <<EOF
+alias docker='sudo /usr/bin/docker'
+EOF
+```
+
 Run a test container 
 ```
 docker run --name hello-test hello-world

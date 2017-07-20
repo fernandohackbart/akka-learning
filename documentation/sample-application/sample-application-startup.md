@@ -15,7 +15,7 @@ docker run --name cassandra-server  -d -e CASSANDRA_BROADCAST_ADDRESS=172.17.0.2
 
 Running with terminal for debug
 ```
-docker run --name cassandra-server  -t -e CASSANDRA_BROADCAST_ADDRESS=172.17.0.2 -p 7000:7000 cassandra
+docker run --name cassandra-server  -t -e CASSANDRA_BROADCAST_ADDRESS=172.17.0.2 -P cassandra
 ```
 
 Cleanup 
@@ -48,12 +48,12 @@ SELECT * FROM product;
 
 Background
 ```
-docker run --name kafka-server -d -p 2181:2181 -p 9092:9092 --env ADVERTISED_HOST=172.17.0.1 --env ADVERTISED_PORT=9092 spotify/kafka
+docker run --name kafka-server -d -p 2181:2181 -p 9092:9092 --env ADVERTISED_HOST=172.17.0.2 --env ADVERTISED_PORT=9092 spotify/kafka
 ```
 
 Foreground
 ```
-docker run --name kafka-server -p 2181:2181 -p 9092:9092 --env ADVERTISED_HOST=172.17.0.1 --env ADVERTISED_PORT=9092 spotify/kafka
+docker run --name kafka-server -p 2181:2181 -p 9092:9092 --env ADVERTISED_HOST=172.17.0.2 --env ADVERTISED_PORT=9092 spotify/kafka
 ```
 
 ## akka-learning

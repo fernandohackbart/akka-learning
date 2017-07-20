@@ -18,17 +18,17 @@ enablePlugins(JavaAppPackaging)
 enablePlugins(UniversalPlugin)
 enablePlugins(DockerPlugin)
 
-packageName in Docker := "akka-learning"
+packageName in Docker := "akka-core-learning"
 version in Docker := "0.0.1"
 maintainer in Docker := "Fernando Hackbart<fhackbart@gmail.com>"
 packageSummary in Docker := "Akka learning application (Fernando Hackbart)"
-packageDescription := "Docker [micro|nano] Akka based Service"
+packageDescription := "Docker Akka based Service"
 dockerRepository := Some("biosphere")
 dockerExecCommand := Seq("sudo","/usr/bin/docker")
 dockerBaseImage := "biosphere/biosphere:base"
 daemonUser in Docker := "biosphere"
 dockerExposedPorts := Seq(9000)
-defaultLinuxInstallLocation in Docker := "/u01/akka-learning"
+defaultLinuxInstallLocation in Docker := "/u01/akka-core-learning"
 ```
 
 Running in IntelliJ IDEA 2017.1
@@ -57,16 +57,4 @@ curl -XPOST -H "Content-Type:application/json" -d '{"brand":"ACME","name":"RoadR
 curl -XPOST -H "Content-Type:application/json" -d '{"messageBody":"Greetings!"}' http://172.17.0.1:9000/product
 ```
 
-Fix root only access to docker command 
-```
-cat > /etc/sudoers.d/docker <<EOF
-fernando ALL=(ALL) NOPASSWD:/usr/bin/docker
-EOF
-```
 
-Create alias file
-```
-cat > .alias <<EOF
-alias docker='sudo /usr/bin/docker'
-EOF
-```
